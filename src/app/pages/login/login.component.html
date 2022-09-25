@@ -1,0 +1,49 @@
+<form
+  action=""
+  class="mt-5"
+  #loginForm="ngForm"
+  (ngSubmit)="handleLogin(loginForm)"
+>
+    <div class="alert alert-danger" *ngIf="errMessage">
+        {{errMessage}}
+    </div>
+  <div class="form-control border-0 border-bottom border-primary mb-4">
+    <input
+      class="input-lg text-center w-100 border-0"
+      type="text"
+      name="email"
+      placeholder="User Email"
+      #email="ngModel"
+      [(ngModel)]="loginData.email"
+      required
+      email
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="email.invalid && (email.touched || loginForm.submitted)"
+  >
+    <div *ngIf="email.errors?.['required']">Email is required</div>
+    <div *ngIf="email.errors?.['email']">Email is Invalid</div>
+  </div>
+  <div class="form-control border-0 border-bottom border-primary mb-4">
+    <input
+      class="text-center w-100 border-0"
+      type="password"
+      name="password"
+      placeholder="User Password"
+      #password="ngModel"
+      [(ngModel)]="loginData.password"
+      required
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="password.invalid && (password.touched || loginForm.submitted)"
+  >
+    <div *ngIf="password.errors?.['required']">Password is required</div>
+  </div>
+  <div class="position-relative">
+    <button class="btn btn-primary position-absolute end-0">LOGIN</button>
+  </div>
+</form>

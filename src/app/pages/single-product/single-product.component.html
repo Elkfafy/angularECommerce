@@ -1,0 +1,11 @@
+<div class="container-fluid" *ngIf="isLoading; else data">
+    <img src="assets/images/loading.gif" alt="" />
+  </div>
+<ng-template #data>
+    <div class="flex">
+        <app-image-sider></app-image-sider>
+        <div class="container">
+
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,24 @@
+<div class="container-fluid" *ngIf="isLoading; else data">
+  <img src="assets/images/loading.gif" alt="" />
+</div>
+<ng-template #data>
+  <div class="row">
+    <div class="col-12 col-md-6 col-xl-4" *ngFor="let product of products">
+      <div class="card m-4" style="width: 18rem">
+        <img
+          src="http://localhost:7777/{{ product.thumnail }}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.desc }}</p>
+          <a routerLink="/products/{{ product._id }}" class="btn btn-primary"
+            >show</a
+          >
+          <span class="p-4">{{ product.price }}$</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

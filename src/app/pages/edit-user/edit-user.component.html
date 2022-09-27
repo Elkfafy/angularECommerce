@@ -1,1 +1,65 @@
-<p>edit-user works!</p>
+<form
+  action=""
+  class="mt-5"
+  [formGroup]="loginForm"
+  (ngSubmit)="handleEdit()"
+>
+  <div class="alert alert-danger" *ngIf="errMessage">
+    {{ errMessage }}
+  </div>
+  <div class="form-control p-4  d-flex justify-content-center align-items-center">
+    <img [src]="imgSrc" alt="" id="profilePic">
+    <label>
+        <img src="assets/images/sign-add-icon.png" alt="" style="margin-left: 2em; cursor: pointer; border-radius: 50%" width="50px" height="50px">
+        <input type="file" (input)='createImgUrl($event)' hidden>
+    </label>
+  </div>
+  <div class="form-control border-0 border-bottom border-primary mb-4">
+
+    <input
+      class="input-lg text-center w-100 border-0"
+      type="text"
+      formControlName="name"
+      placeholder="User Name"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="userData.name.invalid && (userData.name.touched || isSubmitted)"
+  >
+    <div *ngIf="userData.name.errors?.['required']">Name is required</div>
+  </div>
+  <div class="form-control border-0 border-bottom border-primary mb-4">
+    <input
+      class="input-lg text-center w-100 border-0"
+      type="number"
+      formControlName="age"
+      placeholder="User Age"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="userData.age.invalid && (userData.age.touched || isSubmitted)"
+  >
+    <div *ngIf="userData.age.errors?.['required']">Age is required</div>
+  </div>
+  <div class="form-control border-0 border-bottom border-primary mb-4">
+    <input
+      class="input-lg text-center w-100 border-0"
+      type="email"
+      formControlName="email"
+      placeholder="User Email"
+      (input)="errMessage = ''"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="userData.email.invalid && (userData.email.touched || isSubmitted)"
+  >
+    <div *ngIf="userData.email.errors?.['required']">Email is required</div>
+    <div *ngIf="userData.email.errors?.['email']">Email is Invalid</div>
+  </div>
+  <div class="position-relative">
+    <button class="btn btn-primary position-absolute end-0">Save</button>
+  </div>
+</form>

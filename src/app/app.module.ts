@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -17,8 +17,11 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ImageSiderComponent } from './components/image-sider/image-sider.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {ReactiveFormsModule} from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SideImagesComponent } from './components/side-images/side-images.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,8 @@ import { ToastrModule } from 'ngx-toastr';
     AddProductComponent,
     CartComponent,
     ImageSiderComponent,
+    DashboardComponent,
+    SideImagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +47,15 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

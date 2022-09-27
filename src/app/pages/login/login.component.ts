@@ -15,26 +15,35 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
   };
-  errMessage = ''
-  constructor(private global: GlobalService, private router: Router, private toastr: ToastrService) {}
+  errMessage = '';
+  constructor(
+    private global: GlobalService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.global.loginFlag)
+    setTimeout(() => console.log(this.global.loginFlag), 1000)
+    if (this.global.loginFlag) {
+      this.toastr.warning('You Have Already Logged In!');
+      this.router.navigateByUrl('/');
+      return;
+    }}
   handleLogin(loginForm: NgForm) {
     if (loginForm.valid) {
       this.global.login(this.loginData).subscribe(
         (res: any) => {
-          
-          this.toastr.success('Register Succeded')
-          localStorage.setItem('token', res.data.token)
-          this.global.loginFlag = true
-          this.router.navigateByUrl('/')
+          this.toastr.success('Login Succeded');
+          localStorage.setItem('token', res.data.token);
+          this.global.loginFlag = true;
+          this.global.user = res.data.user
+          this.router.navigateByUrl('/');
         },
         (e: any) => {
-          
-          this.toastr.error('Login Failed')
-          if(e.error.data.keyPattern.email){
-            this.errMessage = 'Email or Password is incorrect'
-          }
+          this.toastr.error('Login Failed');
+          this.errMessage = 'Email or Password is incorrect';
         }
       );
     }

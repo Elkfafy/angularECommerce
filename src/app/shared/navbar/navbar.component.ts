@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   handleLogout() {
     const token: any = localStorage.getItem('token');
-    this.global.logout(token).subscribe(
+    this.global.logout().subscribe(
       (res: any) => {
         this.toastr.success('logged out');
         localStorage.removeItem('token');

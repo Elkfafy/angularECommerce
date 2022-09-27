@@ -10,13 +10,14 @@
   <div class="form-control border-0 border-bottom border-primary mb-4">
     <input
       class="input-lg text-center w-100 border-0"
-      type="text"
+      type="email"
       name="email"
       placeholder="User Email"
       #email="ngModel"
       [(ngModel)]="loginData.email"
       required
       email
+      (input)="errMessage = ''"
     />
   </div>
   <div
@@ -35,6 +36,7 @@
       #password="ngModel"
       [(ngModel)]="loginData.password"
       required
+      (input)="errMessage = ''"
     />
   </div>
   <div

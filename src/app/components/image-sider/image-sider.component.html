@@ -1,1 +1,5 @@
-<p>image-sider works!</p>
+<div class="border border-primary d-flex flex-column">
+    <ng-container *ngFor="let image of images">
+        <img [src]="image" alt="" class="mx-auto side-images" />
+    </ng-container>
+</div>

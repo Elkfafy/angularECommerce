@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
           this.toastr.success('Register Succeded');
           localStorage.setItem('token', res.data.token);
           this.global.loginFlag = true;
+          this.global.user = res.data.user
           this.router.navigateByUrl('/');
         },
         (e: any) => {

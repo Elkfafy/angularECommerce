@@ -22,6 +22,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SideImagesComponent } from './components/side-images/side-images.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminUsersComponent } from './components/admin-users/admin-users.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { AdminCategoriesComponent } from './components/admin-categories/admin-categories.component';
+import { AdminAddCategoryComponent } from './components/admin-add-category/admin-add-category.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +44,10 @@ import { SideImagesComponent } from './components/side-images/side-images.compon
     ImageSiderComponent,
     DashboardComponent,
     SideImagesComponent,
+    AdminUsersComponent,
+    AdminProductsComponent,
+    AdminCategoriesComponent,
+    AdminAddCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,8 @@ import { SideImagesComponent } from './components/side-images/side-images.compon
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   providers: [
     {

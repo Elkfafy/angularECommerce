@@ -1,0 +1,56 @@
+<table class="table table-bounded mx-auto">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let product of products
+            | paginate
+              : {
+                  id: 'products',
+                  itemsPerPage: pageSize,
+                  currentPage: p,
+                  totalItems: total
+                };
+          let i = index
+        "
+      >
+        <td>{{ product._id }}</td>
+        <td>{{ product.title }}</td>
+        <td>
+            {{ product.price }}
+        </td>
+        <td>
+          <a class="btn btn-primary mx-2" routerLink="/products/{{ product._id }}"
+            >show</a
+          >
+          
+          <a class="btn btn-warning mx-2" (click)="removeAproduct(product._id, i)"
+            >remove</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    id="products"
+    (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)"
+    [maxSize]="9"
+    [directionLinks]="true"
+    [autoHide]="false"
+    [responsive]="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page"
+  >
+  </pagination-controls>
+  

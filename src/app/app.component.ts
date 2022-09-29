@@ -11,14 +11,14 @@ export class AppComponent {
   constructor(private global: GlobalService) {
     const token = localStorage.getItem('token');
     if (token) {
-      this.global.loginFlag = true;
+      this.global.loginFlag = true
       this.global.getMe().subscribe(
         (res: any) => {
           this.global.user = res.data;
         },
         (e: any) => {
           console.log(e);
-          this.global.loginFlag = false
+          this.global.loginFlag = false;
         }
       );
     }

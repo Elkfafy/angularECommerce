@@ -3,7 +3,13 @@
 </div>
 <ng-template #data>
   <div class="row">
-    <div class="col-12 col-md-6 col-xl-4" *ngFor="let product of products">
+    <div class="col-12 col-md-6 col-xl-4" *ngFor="let product of products | paginate
+    : {
+        id: 'products',
+        itemsPerPage: pageSize,
+        currentPage: p,
+        totalItems: total
+      };">
       <div class="card m-4" style="width: 18rem">
         <img
           src="http://localhost:7777/{{ product.thumnail }}"
@@ -20,4 +26,20 @@
       </div>
     </div>
   </div>
+  <pagination-controls
+    id="products"
+    (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)"
+    [maxSize]="9"
+    [directionLinks]="true"
+    [autoHide]="false"
+    [responsive]="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page"
+  >
+  </pagination-controls>
 </ng-template>
+

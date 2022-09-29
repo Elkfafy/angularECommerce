@@ -18,18 +18,47 @@ export class AddProductComponent implements OnInit {
     thumnail: null,
     images: null,
   };
+  categories : any
   errMessage: string = '';
   thumnailSrc: any;
   imagesSrc: any = [];
+  canExit: boolean = false
   constructor(
     private global: GlobalService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.global.getCategories(0, 9999).subscribe((res:any) => {
+      this.categories = res.data.categories
+    }, (e:any) => console.log(e))
+  }
 
   ngOnInit(): void {}
 
-  addProduct(addProductForm: any) {}
+  addProduct(addProductForm: any) {
+    if (addProductForm.valid) {
+
+      const formData = new FormData;
+      const container:any = {...this.productData}
+      Object.keys(container).forEach((key: any) => {
+        if (key =='images') {
+          for(let image of container.images) {
+
+            formData.append('images', image)
+          }
+        }
+        else formData.append(key, container[key])
+      })
+      this.global.addProduct(formData).subscribe((res: any) => {
+        this.toastr.success('product added')
+        this.canExit = true
+        this.router.navigateByUrl('/products')
+      }, (e) => {
+        console.log(e)
+        this.toastr.error('Server Error')
+      })
+    }
+  }
 
   createImgUrl(ele: any) {
     if (ele.files[0]) {
@@ -42,7 +71,7 @@ export class AddProductComponent implements OnInit {
       console.log(this.productData);
     }
   }
-  async createImgsUrl(ele: any) {
+  createImgsUrl(ele: any) {
     if (ele.files[0]) {
       this.imagesSrc = [];
       this.productData.images = ele.files;
@@ -51,9 +80,10 @@ export class AddProductComponent implements OnInit {
         reader.onload = () => {
           this.imagesSrc.push(reader.result);
         };
-        await reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
       }
-      console.log(this.imagesSrc);
     }
   }
+
+
 }

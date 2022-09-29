@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalService } from 'src/app/services/global.service';
-@Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
-})
 
-export class ProductsComponent implements OnInit {
+@Component({
+  selector: 'app-admin-products',
+  templateUrl: './admin-products.component.html',
+  styleUrls: ['./admin-products.component.css'],
+})
+export class AdminProductsComponent implements OnInit {
   products: any;
-  pageSize: number = 12;
+  pageSize: number = 10;
   p: number = 1;
   total: any = 0;
-  isLoading: boolean = true
   constructor(public global: GlobalService, private toastr: ToastrService) {
     this.getProducts(0, this.pageSize);
   }
@@ -24,8 +22,18 @@ export class ProductsComponent implements OnInit {
     this.global.getProducts(pageNumber, pageLimit).subscribe(
       (res) => {
         this.products = res.data.products;
-        this.isLoading = false
         this.total = res.data.count;
+      },
+      (e) => {
+        console.log(e);
+      }
+    );
+  }
+
+  removeAproduct(id: any, index: any) {
+    this.global.deleteProduct(id).subscribe(
+      (res) => {
+        this.products.splice(index, 1);
       },
       (e) => {
         console.log(e);

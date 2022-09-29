@@ -2,7 +2,7 @@
 <div class="row mt-5">
   <form
     action=""
-    [ngClass]="{'col-9': imagesSrc.length > 0}"
+    [ngClass]="{ 'col-9': imagesSrc.length > 0 }"
     #addProductForm="ngForm"
     (ngSubmit)="addProduct(addProductForm)"
   >
@@ -85,24 +85,6 @@
     </div>
     <div class="form-control border-0 border-bottom border-primary mb-4">
       <input
-        class="input-lg text-center w-100 border-0"
-        type="text"
-        name="category"
-        placeholder="Product Category"
-        [(ngModel)]="productData.category"
-        #category="ngModel"
-        required
-        (input)="errMessage = ''"
-      />
-    </div>
-    <div
-      class="alert alert-danger"
-      *ngIf="category.invalid && (category.touched || addProductForm.submitted)"
-    >
-      <div *ngIf="category.errors?.['required']">category is required</div>
-    </div>
-    <div class="form-control border-0 border-bottom border-primary mb-4">
-      <input
         class="text-center w-100 border-0"
         type="number"
         name="price"
@@ -120,9 +102,34 @@
       <div *ngIf="price.errors?.['required']">price is required</div>
       <div *ngIf="price.errors?.['min']">price should be above 10</div>
     </div>
+
+    <select
+      placeholder="User Type"
+      class="form-select mb-4"
+      aria-label="Default select example"
+      [(ngModel)]="productData.category"
+      name="category"
+      #category="ngModel"
+      required
+    >
+      <option value="" disabled selected>choose a category</option>
+      <ng-container *ngFor="let category of categories">
+        <option value="{{ category.name }}">{{ category.name }}</option>
+      </ng-container>
+    </select>
+    <div
+      class="alert alert-danger"
+      *ngIf="category.invalid && (category.touched || addProductForm.submitted)"
+    >
+      <div *ngIf="category.errors?.['required']">category is required</div>
+    </div>
     <div class="position-relative">
-      <button class="btn btn-primary position-absolute end-0">Register</button>
+      <button class="btn btn-primary position-absolute end-0">Add Product</button>
     </div>
   </form>
-  <app-image-sider *ngIf='imagesSrc.length' class="col-3" [images]="imagesSrc"></app-image-sider>
+  <app-image-sider
+    *ngIf="imagesSrc.length"
+    class="col-3"
+    [images]="imagesSrc"
+  ></app-image-sider>
 </div>

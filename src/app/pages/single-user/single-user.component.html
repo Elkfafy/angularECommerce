@@ -1,1 +1,29 @@
-<p>single-user works!</p>
+<div class="container mt-4">
+    <div class="p-4 border border-primary rounded d-flex mb-4"  >
+        <img class='' src="{{global.backendUrl}}{{user?.image}}" alt="" id="profilePic">
+        <div class="containter ms-4 my-auto">
+            <p>{{user?.name}}
+                <span class="badge bg-success" *ngIf="user?.status; else deactivate">activated</span>
+                <ng-template #deactivate>
+
+                    <span class="badge bg-danger">deactivated</span>
+                </ng-template>
+            </p>
+            <div class="flex" *ngIf="isMine">
+                <!-- <span class="btn btn-primary btn-sm ms-2">add Address</span> -->
+                <span class="btn btn-danger btn-sm ms-2" (click)="handleDelete()">Delete</span>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    email: {{user?.email}}
+                </div>
+                <div class="col-4">
+                    age: {{user?.age}}
+                </div>
+            </div>
+        </div>
+        <div class="container col-3 my-auto">
+            <div class="alert text-white bg-secondary text-center">{{user?.balance}} $</div>
+        </div>
+    </div>
+</div>

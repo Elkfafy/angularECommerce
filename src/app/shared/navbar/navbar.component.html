@@ -58,6 +58,17 @@
           <a
             class="nav-link active"
             aria-current="page"
+            routerLink="single"
+            *ngIf="global.loginFlag"
+            routerLinkActive="text-danger"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
             routerLink="edit-me"
             *ngIf="global.loginFlag"
             routerLinkActive="text-danger"

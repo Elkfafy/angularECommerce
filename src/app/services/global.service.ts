@@ -39,8 +39,14 @@ export class GlobalService {
   getMe(): Observable<any> {
     return this.http.get(this.backendUrl + 'user/me');
   }
+  getUser(id: any): Observable<any> {
+    return this.http.get(this.backendUrl + 'user/all/' + id)
+  }
   editMe(data: any): Observable<any> {
     return this.http.put(this.backendUrl + 'user/edit', data);
+  }
+  deleteMe(): Observable<any> {
+    return this.http.delete(this.backendUrl + 'user/delete')
   }
   getAllUsers(pageNumber: number, pageLimit: number = 10): Observable<any> {
     return this.http.get(

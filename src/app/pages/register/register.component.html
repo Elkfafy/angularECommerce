@@ -1,112 +1,129 @@
-<form
-  action=""
-  class="mt-5"
-  #registerForm="ngForm"
-  (ngSubmit)="handleRegister(registerForm)"
->
-  <div class="alert alert-danger" *ngIf="errMessage">
-    {{ errMessage }}
-  </div>
-  <div class="form-control p-4">
-    <img [src]="imgSrc || 'assets/images/userDefault.png'" alt="" id="profilePic">
-    <label>
-        <img src="assets/images/sign-add-icon.png" alt="" style="margin-left: 2em; cursor: pointer; border-radius: 50%" width="50px" height="50px">
-        <input #profilePic type="file" name="profilePic" (input)="createImgUrl(profilePic)" hidden>
-    </label>
-  </div>
-  <div class="form-control border-0 border-bottom border-primary mb-4">
-
-    <input
-      class="input-lg text-center w-100 border-0"
-      type="text"
-      name="name"
-      placeholder="User Name"
-      [(ngModel)]="userData.name"
-      #name="ngModel"
+<div class="container">
+  <form
+    action=""
+    class="mt-5"
+    #registerForm="ngForm"
+    (ngSubmit)="handleRegister(registerForm)"
+  >
+    <div class="alert alert-danger" *ngIf="errMessage">
+      {{ errMessage }}
+    </div>
+    <div class="form-control p-4">
+      <img
+        [src]="imgSrc || 'assets/images/userDefault.png'"
+        alt=""
+        id="profilePic"
+      />
+      <label>
+        <img
+          src="assets/images/sign-add-icon.png"
+          alt=""
+          style="margin-left: 2em; cursor: pointer; border-radius: 50%"
+          width="50px"
+          height="50px"
+        />
+        <input
+          #profilePic
+          type="file"
+          name="profilePic"
+          (input)="createImgUrl(profilePic)"
+          hidden
+        />
+      </label>
+    </div>
+    <div class="form-control border-0 border-bottom border-primary mb-4">
+      <input
+        class="input-lg text-center w-100 border-0"
+        type="text"
+        name="name"
+        placeholder="User Name"
+        [(ngModel)]="userData.name"
+        #name="ngModel"
+        required
+      />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="name.invalid && (name.touched || registerForm.submitted)"
+    >
+      <div *ngIf="name.errors?.['required']">Name is required</div>
+    </div>
+    <div class="form-control border-0 border-bottom border-primary mb-4">
+      <input
+        class="input-lg text-center w-100 border-0"
+        type="number"
+        name="age"
+        placeholder="User Age"
+        [(ngModel)]="userData.age"
+        #age="ngModel"
+        required
+      />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="age.invalid && (age.touched || registerForm.submitted)"
+    >
+      <div *ngIf="age.errors?.['required']">Age is required</div>
+    </div>
+    <div class="form-control border-0 border-bottom border-primary mb-4">
+      <input
+        class="input-lg text-center w-100 border-0"
+        type="email"
+        name="email"
+        placeholder="User Email"
+        [(ngModel)]="userData.email"
+        #email="ngModel"
+        required
+        email
+        (input)="errMessage = ''"
+      />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="email.invalid && (email.touched || registerForm.submitted)"
+    >
+      <div *ngIf="email.errors?.['required']">Email is required</div>
+      <div *ngIf="email.errors?.['email']">Email is Invalid</div>
+    </div>
+    <div class="form-control border-0 border-bottom border-primary mb-4">
+      <input
+        class="text-center w-100 border-0"
+        type="password"
+        name="password"
+        placeholder="User Password"
+        [(ngModel)]="userData.password"
+        #password="ngModel"
+        required
+      />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="password.invalid && (password.touched || registerForm.submitted)"
+    >
+      <div *ngIf="password.errors?.['required']">Password is required</div>
+    </div>
+    <select
+      placeholder="User Type"
+      class="form-select mb-4"
+      aria-label="Default select example"
+      [(ngModel)]="userData.userType"
+      name="userType"
+      #userType="ngModel"
       required
-    />
-  </div>
-  <div
-    class="alert alert-danger"
-    *ngIf="name.invalid && (name.touched || registerForm.submitted)"
-  >
-    <div *ngIf="name.errors?.['required']">Name is required</div>
-  </div>
-  <div class="form-control border-0 border-bottom border-primary mb-4">
-    <input
-      class="input-lg text-center w-100 border-0"
-      type="number"
-      name="age"
-      placeholder="User Age"
-      [(ngModel)]="userData.age"
-      #age="ngModel"
-      required
-    />
-  </div>
-  <div
-    class="alert alert-danger"
-    *ngIf="age.invalid && (age.touched || registerForm.submitted)"
-  >
-    <div *ngIf="age.errors?.['required']">Age is required</div>
-  </div>
-  <div class="form-control border-0 border-bottom border-primary mb-4">
-    <input
-      class="input-lg text-center w-100 border-0"
-      type="email"
-      name="email"
-      placeholder="User Email"
-      [(ngModel)]="userData.email"
-      #email="ngModel"
-      required
-      email
-      (input)="errMessage = ''"
-    />
-  </div>
-  <div
-    class="alert alert-danger"
-    *ngIf="email.invalid && (email.touched || registerForm.submitted)"
-  >
-    <div *ngIf="email.errors?.['required']">Email is required</div>
-    <div *ngIf="email.errors?.['email']">Email is Invalid</div>
-  </div>
-  <div class="form-control border-0 border-bottom border-primary mb-4">
-    <input
-      class="text-center w-100 border-0"
-      type="password"
-      name="password"
-      placeholder="User Password"
-      [(ngModel)]="userData.password"
-      #password="ngModel"
-      required
-    />
-  </div>
-  <div
-    class="alert alert-danger"
-    *ngIf="password.invalid && (password.touched || registerForm.submitted)"
-  >
-    <div *ngIf="password.errors?.['required']">Password is required</div>
-  </div>
-  <select
-    placeholder="User Type"
-    class="form-select mb-4"
-    aria-label="Default select example"
-    [(ngModel)]="userData.userType"
-    name="userType"
-    #userType="ngModel"
-    required
-  >
-    <option value='' disabled selected>choose a user type</option>
-    <option value="consumer">Consumer</option>
-    <option value="vendor">Vendor</option>
-    <option value="admin">Admin</option>
-  </select>
-  <div
-    class="alert alert-danger"
-    *ngIf="userType.invalid && (userType.touched || registerForm.submitted)"
-  >
-    <div *ngIf="userType.errors?.['required']">User Type is required</div>
-  </div>
-  <div class="position-relative">
-    <button class="btn btn-primary position-absolute end-0">Register</button>
-  </div>
-</form>
+    >
+      <option value="" disabled selected>choose a user type</option>
+      <option value="consumer">Consumer</option>
+      <option value="vendor">Vendor</option>
+      <option value="admin">Admin</option>
+    </select>
+    <div
+      class="alert alert-danger"
+      *ngIf="userType.invalid && (userType.touched || registerForm.submitted)"
+    >
+      <div *ngIf="userType.errors?.['required']">User Type is required</div>
+    </div>
+    <div class="position-relative">
+      <button class="btn btn-primary position-absolute end-0">Register</button>
+    </div>
+  </form>
+</div>

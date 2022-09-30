@@ -6,8 +6,9 @@ import { Observable } from 'rxjs';
 })
 export class GlobalService {
   backendUrl = 'http://localhost:7777/';
-  loginFlag: boolean = false;
-  user: any = {
+ public loginFlag: boolean = false;
+  public flag = false
+ public user: any = {
     userType: 'consumer',
   };
   constructor(private http: HttpClient) {}
@@ -19,6 +20,9 @@ export class GlobalService {
   }
   addProduct(data: any): Observable<any> {
     return this.http.post(this.backendUrl + 'product/add', data)
+  }
+  editProduct(id: any, data: any): Observable<any> {
+    return this.http.put(this.backendUrl + 'product/edit/' + id, data)
   }
   deleteProduct(id: any): Observable<any> {
     return this.http.delete(this.backendUrl + 'product/delete/' + id)

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from './services/global.service';
 
 @Component({
@@ -8,10 +9,11 @@ import { GlobalService } from './services/global.service';
 })
 export class AppComponent {
   title = 'angularECommerce';
-  constructor(private global: GlobalService) {
+  constructor(private global: GlobalService, private activated: ActivatedRoute) {
     const token = localStorage.getItem('token');
     if (token) {
       this.global.loginFlag = true
+      // this.global.user = activated.snapshot.data['me']
       this.global.getMe().subscribe(
         (res: any) => {
           this.global.user = res.data;

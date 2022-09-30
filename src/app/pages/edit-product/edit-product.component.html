@@ -1,1 +1,137 @@
-<p>edit-product works!</p>
+<!-- product (title, price, description, thumnail, images) -->
+<div class="container">
+  <div class="row mt-5">
+    <form
+      action=""
+      [ngClass]="{ 'col-9': imagesSrc.length > 0 }"
+      #addProductForm="ngForm"
+      (ngSubmit)="editProduct(addProductForm)"
+    >
+      <div class="alert alert-danger" *ngIf="errMessage">
+        {{ errMessage }}
+      </div>
+      <div class="form-control p-4">
+        <img [src]="thumnailSrc" alt="" id="thumnailPic" />
+        <label>
+          <img
+            src="assets/images/sign-add-icon.png"
+            alt=""
+            style="margin-left: 2em; cursor: pointer; border-radius: 50%"
+            width="50px"
+            height="50px"
+          />
+          <input
+            #thumnailPic
+            type="file"
+            name="thumnailPic"
+            (input)="createImgUrl(thumnailPic)"
+            hidden
+          />
+        </label>
+        <label>
+          <img
+            src="assets/images/addImages.webp"
+            alt=""
+            style="margin-left: 2em; cursor: pointer; border-radius: 50%"
+            width="50px"
+            height="50px"
+          />
+          <input
+            #images
+            type="file"
+            name="thumnailPic"
+            (input)="createImgsUrl(images)"
+            multiple
+            hidden
+          />
+        </label>
+      </div>
+      <div class="form-control border-0 border-bottom border-primary mb-4">
+        <input
+          class="input-lg text-center w-100 border-0"
+          type="text"
+          name="title"
+          placeholder="Product Title"
+          [(ngModel)]="productData.title"
+          #title="ngModel"
+          required
+        />
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="title.invalid && (title.touched || addProductForm.submitted)"
+      >
+        <div *ngIf="title.errors?.['required']">title is required</div>
+      </div>
+      <div class="form-control border-0 border-bottom border-primary mb-4">
+        <textarea
+          class="input-lg text-center w-100 border-0"
+          type="number"
+          name="desc"
+          placeholder="Product Description"
+          [(ngModel)]="productData.desc"
+          #desc="ngModel"
+          required
+        ></textarea>
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="desc.invalid && (desc.touched || addProductForm.submitted)"
+      >
+        <div *ngIf="desc.errors?.['required']">desc is required</div>
+      </div>
+      <div class="form-control border-0 border-bottom border-primary mb-4">
+        <input
+          class="text-center w-100 border-0"
+          type="number"
+          name="price"
+          placeholder="Product Price"
+          [(ngModel)]="productData.price"
+          #price="ngModel"
+          required
+          min="10"
+        />
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="price.invalid && (price.touched || addProductForm.submitted)"
+      >
+        <div *ngIf="price.errors?.['required']">price is required</div>
+        <div *ngIf="price.errors?.['min']">price should be above 10</div>
+      </div>
+
+      <select
+        placeholder="User Type"
+        class="form-select mb-4"
+        aria-label="Default select example"
+        [(ngModel)]="productData.category"
+        name="category"
+        #category="ngModel"
+        required
+      >
+        <option value="" disabled selected>choose a category</option>
+        <ng-container *ngFor="let category of categories">
+          <option value="{{ category.name }}">{{ category.name }}</option>
+        </ng-container>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          category.invalid && (category.touched || addProductForm.submitted)
+        "
+      >
+        <div *ngIf="category.errors?.['required']">category is required</div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-primary position-absolute end-0">
+          Add Product
+        </button>
+      </div>
+    </form>
+    <app-image-sider
+      *ngIf="imagesSrc.length"
+      class="col-3"
+      [images]="imagesSrc"
+    ></app-image-sider>
+  </div>
+</div>

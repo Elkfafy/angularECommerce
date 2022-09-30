@@ -1,0 +1,6 @@
+#index {
+    height: calc(100vh - 58px);
+    width: 100vw;
+    background-image: url("/assets/images/test3.jpg");
+    background-size: 100% 100%;
+}

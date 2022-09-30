@@ -15,8 +15,8 @@ export class AddProductComponent implements OnInit {
     price: 0,
     desc: '',
     category: '',
-    thumnail: null,
-    images: null,
+    thumnailImage: null,
+    imagesArr: [],
   };
   categories : any
   errMessage: string = '';
@@ -41,10 +41,10 @@ export class AddProductComponent implements OnInit {
       const formData = new FormData;
       const container:any = {...this.productData}
       Object.keys(container).forEach((key: any) => {
-        if (key =='images') {
-          for(let image of container.images) {
+        if (key =='imagesArr') {
+          for(let image of container.imagesArr) {
 
-            formData.append('images', image)
+            formData.append('imagesArr', image)
           }
         }
         else formData.append(key, container[key])
@@ -62,7 +62,7 @@ export class AddProductComponent implements OnInit {
 
   createImgUrl(ele: any) {
     if (ele.files[0]) {
-      this.productData.thumnail = ele.files[0];
+      this.productData.thumnailImage = ele.files[0];
       const reader = new FileReader();
       reader.onload = () => {
         this.thumnailSrc = reader.result;
@@ -74,7 +74,7 @@ export class AddProductComponent implements OnInit {
   createImgsUrl(ele: any) {
     if (ele.files[0]) {
       this.imagesSrc = [];
-      this.productData.images = ele.files;
+      this.productData.imagesArr = ele.files;
       for (let file of ele.files) {
         const reader = new FileReader();
         reader.onload = () => {

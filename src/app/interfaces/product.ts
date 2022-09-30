@@ -3,6 +3,8 @@ export interface Product {
   price: number;
   desc: string;
   category: string;
-  thumnail: any;
-  images: any;
+  thumnail?: any;
+  images?: any;
+  thumnailImage: any;
+  imagesArr: any
 }

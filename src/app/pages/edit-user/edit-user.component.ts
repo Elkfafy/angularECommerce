@@ -33,8 +33,8 @@ export class EditUserComponent implements OnInit {
     }
     this.global.getMe().subscribe(
       (res) => {
-        this.loginForm.patchValue(this.global.user);
-        this.imgSrc = `http://localhost:7777/${this.loginForm.value.image}`;
+        this.loginForm.patchValue(res.data);
+        this.imgSrc = `${this.global.backendUrl}${this.loginForm.value.image}`;
       },
       (e) => {
         console.log(e);
@@ -43,7 +43,13 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
+  ngOnChanges(changes: any) {
+    console.log(changes);
+    console.log('hello');
+  }
+ 
+  
+ 
   handleEdit() {
     this.isSubmitted = true;
     const formData = new FormData();
@@ -53,13 +59,12 @@ export class EditUserComponent implements OnInit {
     });
     this.global.editMe(formData).subscribe(
       (res) => {
-        console.log(res.data);
-        console.log(this.global.user);
-        this.global.user = res.data;
-        this.loginForm.patchValue(this.global.user);
+        this.global.user = {...this.global.user ,...this.loginForm};
+        this.toastr.success('User Edited')
       },
       (e) => {
         console.log(e);
+        this.toastr.error('Server Error')
       }
     );
   }

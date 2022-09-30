@@ -2,7 +2,7 @@
     <div class="p-4 border border-primary rounded d-flex mb-4"  >
         <img class='' src="{{global.backendUrl}}{{user?.image}}" alt="" id="profilePic">
         <div class="containter ms-4 my-auto">
-            <p>{{user?.name}}
+            <p><strong class="me-2">{{user?.name}}</strong>
                 <span class="badge bg-success" *ngIf="user?.status; else deactivate">activated</span>
                 <ng-template #deactivate>
 

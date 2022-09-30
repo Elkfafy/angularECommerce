@@ -6,26 +6,29 @@ import { Observable } from 'rxjs';
 })
 export class GlobalService {
   backendUrl = 'http://localhost:7777/';
- public loginFlag: boolean = false;
-  public flag = false
- public user: any = {
+  public loginFlag: boolean = false;
+  public flag = false;
+  public user: any = {
     userType: 'consumer',
   };
+  cart: any = {};
   constructor(private http: HttpClient) {}
   getProducts(pageNumber: any, limit = 10): Observable<any> {
-    return this.http.get(this.backendUrl + 'product/all?' + `page=${pageNumber}&limit=${limit}`);
+    return this.http.get(
+      this.backendUrl + 'product/all?' + `page=${pageNumber}&limit=${limit}`
+    );
   }
   getSingleProduct(id: any): Observable<any> {
     return this.http.get(this.backendUrl + `product/all/${id}`);
   }
   addProduct(data: any): Observable<any> {
-    return this.http.post(this.backendUrl + 'product/add', data)
+    return this.http.post(this.backendUrl + 'product/add', data);
   }
   editProduct(id: any, data: any): Observable<any> {
-    return this.http.put(this.backendUrl + 'product/edit/' + id, data)
+    return this.http.put(this.backendUrl + 'product/edit/' + id, data);
   }
   deleteProduct(id: any): Observable<any> {
-    return this.http.delete(this.backendUrl + 'product/delete/' + id)
+    return this.http.delete(this.backendUrl + 'product/delete/' + id);
   }
   register(data: any): Observable<any> {
     return this.http.post(this.backendUrl + 'user/register', data);
@@ -40,13 +43,13 @@ export class GlobalService {
     return this.http.get(this.backendUrl + 'user/me');
   }
   getUser(id: any): Observable<any> {
-    return this.http.get(this.backendUrl + 'user/all/' + id)
+    return this.http.get(this.backendUrl + 'user/all/' + id);
   }
   editMe(data: any): Observable<any> {
     return this.http.put(this.backendUrl + 'user/edit', data);
   }
   deleteMe(): Observable<any> {
-    return this.http.delete(this.backendUrl + 'user/delete')
+    return this.http.delete(this.backendUrl + 'user/delete');
   }
   getAllUsers(pageNumber: number, pageLimit: number = 10): Observable<any> {
     return this.http.get(
@@ -54,18 +57,20 @@ export class GlobalService {
     );
   }
   changeStatus(id: any, status: any): Observable<any> {
-    return this.http.patch(this.backendUrl + `user/status/${id}`, {status})
+    return this.http.patch(this.backendUrl + `user/status/${id}`, { status });
   }
   deleteUser(id: any): Observable<any> {
-    return this.http.delete(this.backendUrl + 'user/all/' + id)
+    return this.http.delete(this.backendUrl + 'user/all/' + id);
   }
   getCategories(pageNumber: any, limit = 10): Observable<any> {
-    return this.http.get(this.backendUrl + 'category?' + `page=${pageNumber}&limit=${limit}`)
+    return this.http.get(
+      this.backendUrl + 'category?' + `page=${pageNumber}&limit=${limit}`
+    );
   }
   addCategory(name: any): Observable<any> {
-    return this.http.post(this.backendUrl + 'category', {name})
+    return this.http.post(this.backendUrl + 'category', { name });
   }
   deleteCategory(id: any): Observable<any> {
-    return this.http.delete(this.backendUrl + 'category/' + id)
+    return this.http.delete(this.backendUrl + 'category/' + id);
   }
 }

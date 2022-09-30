@@ -27,6 +27,7 @@ import { AdminUsersComponent } from './components/admin-users/admin-users.compon
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminCategoriesComponent } from './components/admin-categories/admin-categories.component';
 import { AdminAddCategoryComponent } from './components/admin-add-category/admin-add-category.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { AdminAddCategoryComponent } from './components/admin-add-category/admin
     AdminProductsComponent,
     AdminCategoriesComponent,
     AdminAddCategoryComponent,
+    AddToCartComponent,
   ],
   imports: [
     BrowserModule,

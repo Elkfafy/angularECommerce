@@ -1,32 +1,45 @@
 <div class="container mt-4">
-<div class="container-fluid" *ngIf="isLoading; else data">
+  <div class="container-fluid" *ngIf="isLoading; else data">
     <img src="assets/images/loading.gif" alt="" />
   </div>
-<ng-template #data>
+  <ng-template #data>
     <div class="row">
-        <div class="container col-9">
-            <div class="d-flex">
-                <img src="{{global.backendUrl}}{{product.thumnail}}" alt="" style="height: 10rem; border-radius: 10px; margin-right: 2em">
-                <div class="row">
-                    <div class="col-12">
-                        <strong class="h3 me-2">{{product.title}}</strong>
-                        by <em class="text-secondary">{{product.vendorName}}</em>
-                    </div>
-                    <div class="col-12">
-                        category: <em class="textSecondary">{{product.category}}</em>
-                    </div>
-                    <div class="col-12">
-                        price: <em class="textSecondary">{{product.price}} $</em>
-                    </div>
-                    <div class="col-12" *ngIf="isMine">
-                        <a  class="btn btn-primary me-2">Edit</a>
-                        <a  class="btn btn-danger">Delete</a>
-                    </div>
-                </div>
+      <div class="container col-9">
+        <div class="d-flex">
+          <img
+            src="{{ global.backendUrl }}{{ product.thumnail }}"
+            alt=""
+            style="height: 10rem; border-radius: 10px; margin-right: 2em"
+          />
+          <div class="row">
+            <div class="col-12">
+              <strong class="h3 me-2">{{ product.title }}</strong>
+              by <em class="text-secondary">{{ product.vendorName }}</em>
             </div>
-            <div class="container mt-4">{{product.desc}}</div>
+            <div class="col-12">
+              category: <em class="textSecondary">{{ product.category }}</em>
+            </div>
+            <div class="col-12">
+              price: <em class="textSecondary">{{ product.price }} $</em>
+            </div>
+            <div class="col-12" *ngIf="isMine">
+              <a
+                class="btn btn-primary me-2"
+                routerLink="/products/edit/{{ product._id }}"
+                >Edit</a
+              >
+              <a class="btn btn-danger" (click)="handleDelete(product._id)">Delete</a>
+            </div>
+          </div>
+          <app-add-to-cart class="col-3 my-auto"> </app-add-to-cart>
         </div>
-        <app-image-sider [images]="product.images" class="col-3" *ngIf="product.images?.length"></app-image-sider>
+        <div class="container mt-4">{{ product.desc }}</div>
+      </div>
+      <app-image-sider
+        [images]="product.images"
+        class="col-3"
+        *ngIf="product.images?.length"
+      ></app-image-sider>
     </div>
-</ng-template>
+  </ng-template>
 </div>

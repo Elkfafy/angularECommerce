@@ -17,6 +17,7 @@ export class AppComponent {
       this.global.getMe().subscribe(
         (res: any) => {
           this.global.user = res.data;
+          this.global.cart.userId = res.data._id
         },
         (e: any) => {
           console.log(e);

@@ -1,1 +1,5 @@
-<a class="btn btn-warning">Add To Cart</a>
+<p class="text-danger" *ngIf="!global.loginFlag">login first to buy</p>
+<div class="border rounded border-warning p-1 col-4 text-center" *ngIf="isAdded">
+    <a class="text-danger h4" (click)="handleDec()">-</a> {{global.cart.products[productIndex]?.count}} <a class="text-danger h4" (click)="handleInc()">+</a>
+</div>
+<a class="btn btn-warning" (click)="handleAdding()" *ngIf="!isAdded">Add To Cart</a>

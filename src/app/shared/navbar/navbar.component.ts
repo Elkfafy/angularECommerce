@@ -25,6 +25,11 @@ export class NavbarComponent implements OnInit {
         localStorage.removeItem('token');
         this.global.loginFlag = false;
         this.global.user.userType = 'consumer';
+        this.global.cart = {
+          userId: '',
+          products: [],
+          totalPrice: 0
+        }
       },
       (e) => {
         console.log(e);

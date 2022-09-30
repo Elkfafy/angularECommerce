@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanDeactivateGuard } from './guards/can-deactivate.guard';
 import { AddProductComponent } from './pages/add-product/add-product.component';
+import { CartComponent } from './pages/cart/cart.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
       { path: '', component: SingleUserComponent },
     ],
   },
+  {path: 'cart', component: CartComponent}
 ];
 
 @NgModule({

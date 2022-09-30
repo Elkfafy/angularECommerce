@@ -31,7 +31,7 @@
               <a class="btn btn-danger" (click)="handleDelete(product._id)">Delete</a>
             </div>
           </div>
-          <app-add-to-cart class="col-3 my-auto"> </app-add-to-cart>
+          <app-add-to-cart [productId]="product._id" [productPrice]="product.price" class="col-3 my-auto"> </app-add-to-cart>
         </div>
         <div class="container mt-4">{{ product.desc }}</div>
       </div>

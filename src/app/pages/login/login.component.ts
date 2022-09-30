@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.data.token);
           this.global.loginFlag = true;
           this.global.user = res.data.user
+          this.global.cart = {
+            userId: res.data.user._id,
+            products: [],
+            totalPrice: 0
+          }
           this.router.navigateByUrl('/');
         },
         (e: any) => {

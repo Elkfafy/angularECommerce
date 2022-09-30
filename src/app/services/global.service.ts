@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Cart } from '../interfaces/cart';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,7 +12,11 @@ export class GlobalService {
   public user: any = {
     userType: 'consumer',
   };
-  cart: any = {};
+  cart : Cart= {
+    userId: '',
+    products: [],
+    totalPrice: 0
+  };
   constructor(private http: HttpClient) {}
   getProducts(pageNumber: any, limit = 10): Observable<any> {
     return this.http.get(
